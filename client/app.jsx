@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Container, Typography, Button, Grid } from '@material-ui/core'
@@ -9,11 +9,16 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(4),
     paddingBottom: theme.spacing(1),
     borderBottom: '1px solid lightgrey'
+  },
+  dangerButton: {
+    color: theme.status.danger
   }
 }))
 
 export default function App () {
-  const { pageHeader } = useStyles()
+  const { pageHeader, dangerButton } = useStyles()
+
+  const [enablePower, setEnablePower] = useState(false)
 
   return (
     <Container fixed>
@@ -32,12 +37,12 @@ export default function App () {
           </Button>
         </Grid>
         <Grid item xs={4}>
-          <Button variant="contained" fullWidth color="default">
+          <Button variant="contained" onClick={() => { setEnablePower(!enablePower) }} fullWidth className={dangerButton}>
             {'I\'ve come to see'}
           </Button>
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained" fullWidth disabled>
+          <Button variant="contained" fullWidth disabled={enablePower}>
             {'Your power flowin\''}
           </Button>
         </Grid>
