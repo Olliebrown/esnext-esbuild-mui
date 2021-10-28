@@ -11,7 +11,7 @@ const _DEV_ = process.argv.some((arg) => (arg.toLowerCase() === 'dev'))
 const options = {
   // List of all separate entry points
   entryPoints: [
-    './client/app.jsx'
+    './client/main.jsx'
   ],
 
   // Configure output location and names
