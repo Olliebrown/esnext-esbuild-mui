@@ -1,24 +1,28 @@
+// React basics
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 
-import { ThemeProvider, createTheme } from '@material-ui/core/styles'
-import { orange } from '@material-ui/core/colors'
-import { CssBaseline } from '@material-ui/core'
+// Theme and Styling Basics
+import { ThemeProvider } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
 
+// Bring in our theme and main app components
+import customTheme from './theme.js'
 import App from './app.jsx'
 
-const theme = createTheme({
-  status: {
-    danger: orange[500]
-  }
-})
+// Enable live reloading of browser in _DEV_ mode using ESBuild
+if (_DEV_) {
+  new EventSource('/esbuild').addEventListener('change', () => location.reload())
+}
 
-ReactDOM.render(
+// Render the basic app into the ROOT div
+const container = document.getElementById('root')
+const reactRoot = createRoot(container)
+reactRoot.render(
   <React.Fragment>
     <CssBaseline />
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={customTheme}>
       <App />
     </ThemeProvider>
-  </React.Fragment>,
-  document.getElementById('root')
+  </React.Fragment>
 )
